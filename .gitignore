@@ -1,0 +1,5 @@
+.vscode
+Ascgen*/
+env/
+screenshot/
+.DS_Store/
