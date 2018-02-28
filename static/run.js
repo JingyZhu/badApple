@@ -4,6 +4,7 @@ let clicked = false;
 let run = null;
 let vid = document.getElementById('vid')
 
+vid.playbackRate = 0.992;
 function init() {
     i = 0;
     let frame_zero = document.getElementById(`frame0`);
@@ -18,8 +19,8 @@ function play() {
     frame_next.style.display = "block";
     i++;
     console.log(i);
-    clearInterval(run);
-    run = setInterval(play, 40+Math.random());
+    // clearInterval(run);
+    // run = setInterval(play, 42);
     if (i >= num) {
         clearInterval(run);
     }
@@ -30,7 +31,7 @@ window.addEventListener('click', ()=>{
         clicked = true;
         vid.play()
         if (i < num) {
-            run = setInterval(play, 40+Math.random());
+            run = setInterval(play, 42);
         } else {
             let frame_next = document.getElementById(`frame${num-1}`)
             frame_next.style.display = "none";

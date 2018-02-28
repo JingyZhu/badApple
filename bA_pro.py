@@ -10,16 +10,16 @@ pixels_ramp = '@%#*+=-:. '
 class TextAnimation:
     def __init__(self, dir, vwidth, vheight):
         self.picFile = glob.glob(sys.argv[1]+'/*.jpg')
-        self.resultList = []
+        self.resultList = ''
         self.width = int(vwidth)
         self.height = int(vheight)
         self.file = open('index.html', 'w+')
         self.count = 0
     
-    def pic2Text(self, img, vwidth, vheight):
+    def pic2Text(self, img):
         string = ''
         for row in range(1, img.shape[0]-1):
-            for col in np.arange(1, img.shape[1]-1):
+            for col in range(1, img.shape[1]-1):
                 pixel = np.sum(img[row-1:row+2, col-1:col+2])
                 pixel = pixel/9
                 string += pixels_ramp[int(floor(pixel/25.6))]
@@ -35,10 +35,10 @@ class TextAnimation:
             size = (self.width+2, self.height+2)
             img = img.resize(size)
             img = img.convert('L')
-            text = self.pic2Text(np.asarray(img), self.width, self.height)
+            text = html.escape(self.pic2Text(np.asarray(img)))
             self.file.write('<pre id = "frame{}">'.format(self.count))
-            self.file.write(html.escape(text))
-            self.file.write('</pre>\n')
+            self.file.write(text)
+            self.file.write('</pre>')
             self.count += 1
             print('{} complete!'.format(im_path))
         self.writeToHTML_foot()
@@ -68,9 +68,9 @@ class TextAnimation:
         foot = \
         '''
         <video id="vid" width="480" height="320" style="padding: 10px">
-             <source src="badApple.mp4" type="video/mp4">
+             <source src="./static/badApple.mp4" type="video/mp4">
         </video>
-        <script type="text/javascript" src="./run.js"></script>
+        <script type="text/javascript" src="./static/run.js"></script>
         </body>
         </html>
         '''

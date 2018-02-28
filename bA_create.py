@@ -2,7 +2,7 @@ from PIL import Image, ImageColor, ImageSequence
 import numpy as np
 import cv2
 
-video_path = 'badApple.mp4'
+video_path = './static/badApple.mp4'
 
 # def img_process(img_array):
 #     results = ''
